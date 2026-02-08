@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💗</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #7b1fa2, #c2185b, #e91e63);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.15);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    color: red;
+    font-weight: bold;
+    font-size: 1.8em;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    position: relative;
+    height: 120px;
+  }
+
+  button {
+    padding: 12px 25px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  .yes {
+    background: #2ecc71;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+
+  .no {
+    background: black;
+    color: white;
+    top: 0;
+    left: 10%;
+  }
+
+  .message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .rose {
+    font-size: 2.5em;
+    margin: 10px 0;
+  }
+
+  /* Floating Hearts */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-110vh) scale(1.5);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="question">Will you be my Valentine AREEBA 💗🌻</h1>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClick()">Yes 💗</button>
+    <button class="no" id="noBtn" onclick="noClick()">No 😭</button>
+  </div>
+
+  <div class="message" id="message"></div>
+</div>
+
+<audio id="music">
+  <source src="https://audio.jukehost.co.uk/Jy3YouBeMyGirl.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  let noCount = 0;
+  const message = document.getElementById("message");
+  const question = document.getElementById("question");
+  const music = document.getElementById("music");
+  const noBtn = document.getElementById("noBtn");
+
+  function moveNoButton() {
+    const x = Math.random() * 70;
+    const y = Math.random() * 70;
+    noBtn.style.left = x + "%";
+    noBtn.style.top = y + "%";
+  }
+
+  function noClick() {
+    noCount++;
+    moveNoButton();
+
+    if (noCount === 1) {
+      message.innerHTML = "<span class='red'><b>Come on</b></span>";
+    } else if (noCount === 2) {
+      message.innerHTML = "<span class='red'><b>Really?</b></span>";
+    } else if (noCount === 3) {
+      message.innerHTML = "<span class='red'><b>Think about it</b></span>";
+    } else if (noCount === 4) {
+      message.innerHTML = "<span class='red'><b>One more time...</b></span>";
+    } else {
+      message.innerHTML = "<span class='red'><b>Please 🥺</b></span>";
+    }
+  }
+
+  function yesClick() {
+    message.innerHTML = "<span style='color: #2ecc71;'><b>Yay! You said YES! 💗</b></span>";
+    question.innerHTML = "I love you AREEBA! 💗💗💗";
+    noBtn.style.display = "none";
+    music.play();
+    
+    // Create floating hearts
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        createHeart();
+      }, i * 200);
+    }
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(heart);
+    
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+</script>
+
+</body>
+</html>
