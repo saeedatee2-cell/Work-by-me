@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Valentine 💗</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#7b1fa2,#e91e63,#c2185b);
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+  color:white;
+}
+
+.card{
+  background:rgba(255,255,255,0.15);
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  position:relative;
+  z-index:2;
+}
+
+h1{
+  color:red;
+  font-weight:bold;
+}
+
+.buttons{
+  margin-top:30px;
+  height:120px;
+  position:relative;
+}
+
+button{
+  padding:12px 26px;
+  font-size:1.2em;
+  border-radius:50px;
+  border:none;
+  cursor:pointer;
+  position:absolute;
+}
+
+.yes{
+  background:#2ecc71;
+  color:white;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:0;
+}
+
+.no{
+  background:black;
+  color:white;
+  top:0;
+  left:10%;
+}
+
+.message{
+  margin-top:20px;
+  font-size:1.2em;
+  font-weight:bold;
+}
+
+.red{color:red;}
+.rose{font-size:2.4em;}
+
+/* floating hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(-110vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="question">Will you be my Valentine AREEBA 💗🌻</h1>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClick()">Yes 💗</button>
+    <button class="no" id="noBtn" onclick="noClick()">No 😭</button>
+  </div>
+
+  <div class="message" id="msg"></div>
+</div>
+
+<audio id="music">
+  <source src="https://audio.jukehost.co.uk/Jy3YouBeMyGirl.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let noCount=0;
+const msg=document.getElementById("msg");
+const q=document.getElementById("question");
+const noBtn=document.getElementById("noBtn");
+const music=document.getElementById("music");
+
+function moveNo(){
+  noBtn.style.left=Math.random()*70+"%";
+  noBtn.style.top=Math.random()*70+"%";
+}
+
+function noClick(){
+  noCount++;
+  moveNo();
+  if(noCount===1){
+    msg.innerHTML="<span class='red'><b>Come on, Click Yes!</b></span>";
+  }else{
+    msg.innerHTML="You can't escape destiny! 💝";
+  }
+}
+
+function yesClick(){
+  q.innerHTML="Yay!!! 🎉";
+  msg.innerHTML=`
+    <div class="rose">🌹🌹🌹</div>
+    <div class="red"><b>I knew you'd say yes!</b></div>
+    <div>You made me the happiest 💖</div>
+  `;
+  music.play();
+}
+
+// hearts
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML=Math.random()>0.5?"💗":"❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(4+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},300);
+</script>
+
+</body>
+</html>
